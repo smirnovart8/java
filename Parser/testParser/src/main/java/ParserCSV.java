@@ -9,7 +9,7 @@ public class ParserCSV {
   public static ArrayList<DataIn> listCSV;
 
 
-  public static void parser (String path) {
+  public static void parser(String path) {
 
     listCSV = loadFromFile(path);
 
@@ -31,14 +31,13 @@ public class ParserCSV {
         dataInList.add(new DataIn(
             Integer.parseInt(fragments[0]),
             Double.parseDouble(fragments[1]), fragments[2], fragments[3])
-            );
+        );
       }
     } catch (Exception ex) {
       ex.printStackTrace();
     }
     return dataInList;
   }
-
 
 
 }
