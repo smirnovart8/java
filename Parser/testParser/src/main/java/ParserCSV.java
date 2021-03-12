@@ -1,18 +1,23 @@
+import com.opencsv.bean.CsvToBeanBuilder;
 import data.DataIn;
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ParserCSV {
 
   public static ArrayList<DataIn> listCSV;
+  private static Logger logger = LogManager.getRootLogger();
 
 
-  public static void parser(String path) {
+  public static void parser(String path) throws IOException {
 
     listCSV = loadFromFile(path);
-
     //listCSV.forEach(element->System.out.println(element.toString()));
 
   }
@@ -25,7 +30,7 @@ public class ParserCSV {
       for (String line : lines) {
         String[] fragments = line.split(",", 4);
         if (fragments.length != 4) {
-          System.out.println("Wrong line: " + line);
+          logger.error("Wrong line!");
           continue;
         }
         dataInList.add(new DataIn(

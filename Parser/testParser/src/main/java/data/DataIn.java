@@ -1,5 +1,6 @@
 package data;
 
+
 public class DataIn {
 
   private int orderId;
@@ -7,6 +8,7 @@ public class DataIn {
   private double amount;
 
   private String currency;
+
 
   private String comment;
 

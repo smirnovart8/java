@@ -7,30 +7,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-
 public class ParserJSON {
 
+  public static ArrayList<DataIn> listJSON;
 
-    public static ArrayList<DataIn> listJSON;
+  public static void parser(String path) throws IOException {
 
-
-
-    public static void parser(String path) throws IOException {
-
-        String line;
-        DataIn data;
-        listJSON = new ArrayList<>();
-
-
+    String line;
+    DataIn data;
+    listJSON = new ArrayList<>();
     BufferedReader myReader = new BufferedReader(new FileReader(path));
 
     while ((line = myReader.readLine()) != null) {
-    data = new Gson().fromJson(line, DataIn.class);
-        listJSON.add(data);
-    }
-        //listJSON.forEach(d -> System.out.println(d.toString()));
+      data = new Gson().fromJson(line, DataIn.class);
+      listJSON.add(data);
     }
 
   }
+
+}
 
 

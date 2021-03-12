@@ -1,45 +1,61 @@
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Main {
 
-  //public static final String FILE = "data/file1.csv";
-  //public static final String FILE1 = "data/file2.json";
-  private static final String CMD = "INCORRECT COMMAND";
+  public static final String FILE = "data/file1.csv";
+  public static final String FILE1 = "data/file2.json";
+  private static final String CMD = "INCORRECT FORMAT";
+  private static final String NOTFOUND = "FILES NOT FOUND";
+
+  private static Logger logger = LogManager.getRootLogger();
 
   public static void main(String[] arg) {
 
+    if (arg.length != 0) {
 
-
-    if (arg.length !=0) {
-
-      for (int i=0; i < arg.length; i++) {
+      for (int i = 0; i < arg.length; i++) {
 
         try {
           if (arg[i].endsWith(".csv")) {
 
             ParserCSV.parser(arg[i]);
-            //ParserCSV.listCSV.forEach(System.out::println);
-            Converter.convert(ParserCSV.listCSV).forEach(e -> System.out.println(e.toString()));
+            Converter.convert(ParserCSV.listCSV, arg[i])
+                .forEach(e -> System.out.println(e.toString()));
             continue;
-          }
-          else if (arg[i].endsWith(".json")) {
+          } else if (arg[i].endsWith(".json")) {
             ParserJSON.parser(arg[i]);
-           // ParserJSON.listJSON.forEach(System.out::println);
-            Converter.convert(ParserJSON.listJSON).forEach(e -> System.out.println(e.toString()));
+            Converter.convert(ParserJSON.listJSON, arg[i])
+                .forEach(e -> System.out.println(e.toString()));
             continue;
-          }
-          else {
-            System.out.println(arg[i] + "  " + CMD);
+          } else {
+            logger.info(arg[i] + "  " + CMD);
           }
 
         } catch (Exception e) {
           e.printStackTrace();
         }
       }
+    } else {
+      logger.error(NOTFOUND);
     }
-    else
-      System.out.println(CMD);
   }
 
+  /*public static void main(String[] arg) {
+
+
+    try {
+
+      ParserCSV.parser(FILE);
+      ParserJSON.parser(FILE1);
+
+      Converter.convert(ParserCSV.listCSV,"filename").forEach(e-> System.out.println(e.toString()));
+      Converter.convert(ParserJSON.listJSON,"filename").forEach(e-> System.out.println(e.toString()));
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+  }*/
 
 }

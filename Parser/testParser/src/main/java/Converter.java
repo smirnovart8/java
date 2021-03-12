@@ -6,12 +6,12 @@ public class Converter {
 
   public static ArrayList<DataOut> outData = new ArrayList<>();
 
-  public static ArrayList<DataOut> convert(ArrayList<DataIn> list) {
+  public static ArrayList<DataOut> convert(ArrayList<DataIn> list, String arg) {
 
     for (int i = 0; i < list.size(); i++) {
       outData.add(
           new DataOut(list.get(i).getOrderId(), list.get(i).getAmount(), list.get(i).getComment(),
-              "undefined", i, "OK"));
+              arg, i, "OK"));
     }
 
     return outData;
