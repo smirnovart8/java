@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Converter {
 
-  public static ArrayList<DataOut> outData = new ArrayList<>();
-
   public static ArrayList<DataOut> convert(ArrayList<DataIn> list, String arg) {
+
+    ArrayList<DataOut> outData = new ArrayList<>();
 
     for (int i = 0; i < list.size(); i++) {
       outData.add(

@@ -10,13 +10,18 @@ import java.util.ArrayList;
 public class ParserJSON {
 
   public static ArrayList<DataIn> listJSON;
+  private String path;
 
-  public static void parser(String path) throws IOException {
+  public ParserJSON(String path) {
+    this.path = path;
+  }
+
+  public void parser() throws IOException {
 
     String line;
     DataIn data;
     listJSON = new ArrayList<>();
-    BufferedReader myReader = new BufferedReader(new FileReader(path));
+    BufferedReader myReader = new BufferedReader(new FileReader(this.path));
 
     while ((line = myReader.readLine()) != null) {
       data = new Gson().fromJson(line, DataIn.class);

@@ -2,34 +2,29 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Main {
-
-  public static final String FILE = "data/file1.csv";
-  public static final String FILE1 = "data/file2.json";
+  
   private static final String CMD = "INCORRECT FORMAT";
   private static final String NOTFOUND = "FILES NOT FOUND";
 
-  private static Logger logger = LogManager.getRootLogger();
+  private static final Logger logger = LogManager.getRootLogger();
 
   public static void main(String[] arg) {
-
     if (arg.length != 0) {
 
-      for (int i = 0; i < arg.length; i++) {
+      for (String s : arg) {
 
         try {
-          if (arg[i].endsWith(".csv")) {
+          if (s.endsWith(".csv")) {
 
-            ParserCSV.parser(arg[i]);
-            Converter.convert(ParserCSV.listCSV, arg[i])
+            new ParserCSV(s).parser();
+            Converter.convert(ParserCSV.listCSV, s)
                 .forEach(e -> System.out.println(e.toString()));
-            continue;
-          } else if (arg[i].endsWith(".json")) {
-            ParserJSON.parser(arg[i]);
-            Converter.convert(ParserJSON.listJSON, arg[i])
+          } else if (s.endsWith(".json")) {
+            new ParserJSON(s).parser();
+            Converter.convert(ParserJSON.listJSON, s)
                 .forEach(e -> System.out.println(e.toString()));
-            continue;
           } else {
-            logger.info(arg[i] + "  " + CMD);
+            logger.info(s + "  " + CMD);
           }
 
         } catch (Exception e) {
@@ -40,22 +35,5 @@ public class Main {
       logger.error(NOTFOUND);
     }
   }
-
-  /*public static void main(String[] arg) {
-
-
-    try {
-
-      ParserCSV.parser(FILE);
-      ParserJSON.parser(FILE1);
-
-      Converter.convert(ParserCSV.listCSV,"filename").forEach(e-> System.out.println(e.toString()));
-      Converter.convert(ParserJSON.listJSON,"filename").forEach(e-> System.out.println(e.toString()));
-
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
-  }*/
 
 }

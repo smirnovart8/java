@@ -39,7 +39,7 @@
         <artifactId>maven-assembly-plugin</artifactId>
         <executions>
           <execution>
-            <phase>package</phase>
+            <phase>testParser</phase>
             <goals>
               <goal>single</goal>
             </goals>
@@ -49,7 +49,8 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>Main</mainClass>
+              <classpathPrefix>lib/</classpathPrefix>
+              <mainClass>testParser.Main</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>
@@ -82,5 +83,8 @@
     </dependency>
 
   </dependencies>
-
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
 </project>
